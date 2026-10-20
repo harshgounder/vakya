@@ -212,6 +212,10 @@ card(s3, 6.62, 4.06, 6.04, 1.42,
       line("29 MB binary  ·  29-121M params  ·  8-29 MB  ·  6000 tok/s prefill, 1200 tok/s decode", bullet=True, sz=8.4),
       line("3.70% WER on a $5 microcontroller with no neural accelerator", bullet=True, sz=8.4),
       line("a 2-layer subnetwork, fine-tuned on one tool set, runs on devices far smaller than the full model needs", bullet=True, sz=8.4)])
+card(s3, 0.67, 6.30, 5.68, 0.40,
+     [{"t": "BUILD  github.com/harshgounder/vakya     LIVE  harshgounder.github.io/vakya     DECK  the 6-slide PDF is the same file",
+       "sz": 8.4, "b": True, "c": ACC, "align": PP_ALIGN.CENTER, "ls": 0.95}],
+     fill=CARD2, pad=0.08)
 card(s3, 6.62, 5.60, 6.04, 1.10,
      [label("THE THREE CONTRIBUTIONS", ACC2),
       line("1.  Per-language subnetwork lattice: Tamil pays for 4 layers, code-mixed Hindi pays for 16. One download.", bullet=True, sz=8.6),
@@ -340,9 +344,11 @@ for i, (h, col, items) in enumerate(REFS):
         blocks.append(tiny(it, sz=7.5, c=INK, after=2.0))
     card(s6, x, 1.30, 3.90, 4.80, blocks, pad=0.11)
 
-card(s6, 0.67, 6.20, 11.99, 0.62,
+card(s6, 0.67, 6.12, 11.99, 0.70,
      [{"t": "OURS:  Indic-ToolCall-Indic, a published benchmark extension  ·  the per-language subnetwork lattice  ·  the grammar-as-instruction-set compiler  ·  the per-script calibration and refusal protocol  ·  the ablation plan",
-       "sz": 9.0, "b": True, "c": INK, "align": PP_ALIGN.CENTER, "ls": 0.95}],
+       "sz": 8.6, "b": True, "c": INK, "align": PP_ALIGN.CENTER, "sp_after": 2.5, "ls": 0.95},
+      {"t": "BUILD  github.com/harshgounder/vakya     LIVE  harshgounder.github.io/vakya     DECK  the 6-slide PDF, rebuilt from the official template by build/build_deck.py",
+       "sz": 8.4, "b": True, "c": ACC, "align": PP_ALIGN.CENTER, "ls": 0.95}],
      fill=CARD2)
 
 # ----------------------------------------------------------------- delete slide 7
