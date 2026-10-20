@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VĀKYA · RISC · Hypnexis 2026</title>
+<style>
+:root{--ink:#0b1b33;--ink2:#2a4a77;--acc:#0b5ed7;--grn:#0b6b4f;--bg:#e2f3fe;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);
+background:linear-gradient(160deg,#e2f3fe 0%,#c7eafe 40%,#a3dbfe 100%);min-height:100vh}
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px 70px}
+header{padding:46px 0 26px;border-bottom:2px solid rgba(11,94,215,.22)}
+.kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);font-weight:700}
+h1{font-size:52px;margin:6px 0 2px;letter-spacing:-.02em}
+h1 span{font-weight:300;color:var(--ink2)}
+.tag{font-size:20px;color:var(--ink2);margin:14px 0 0;max-width:780px}
+.lede{font-size:17px;margin:18px 0 0;max-width:800px}
+.card{background:var(--card);border:1px solid #9ec8ee;border-radius:12px;padding:20px 22px;margin:18px 0}
+h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+h3{font-size:19px;margin:0 0 6px}
+p{margin:0 0 10px}
+ul{margin:8px 0 0;padding-left:20px}
+li{margin:0 0 7px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.num{font-size:34px;font-weight:800;color:var(--acc);line-height:1}
+.num.g{color:var(--grn)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);
+border-bottom:2px solid #9ec8ee;padding:7px 8px}
+td{padding:8px;border-bottom:1px solid #e3eef8;vertical-align:top}
+a{color:var(--acc)}
+code{background:#eef6ff;padding:1px 5px;border-radius:4px;font-size:13px}
+.btn{display:inline-block;background:var(--acc);color:#fff;text-decoration:none;padding:11px 20px;
+border-radius:8px;font-weight:700;font-size:15px;margin:6px 10px 0 0}
+.btn.g{background:var(--grn)}
+footer{margin-top:40px;padding-top:20px;border-top:2px solid rgba(11,94,215,.22);font-size:14px;color:var(--ink2)}
+.team{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.member{background:#fff;border:1px solid #9ec8ee;border-radius:9px;padding:10px 14px;font-size:14px}
+.member b{color:var(--acc)}
+</style></head><body><div class="wrap">
+<header>
+ <div class="kicker">Hypnexis 2026 · Round 1 online PPT · Team RISC</div>
+ <h1>V<span>Ā</span>KYA</h1>
+ <p class="tag">A $5 device that hears Indian speech and performs a verified action, offline, forever.</p>
+ <p class="lede"><b>Move the constraint from the model to the decoder.</b> One core. Many instruction sets. The task
+ compiles to a grammar; the grammar <i>is</i> the instruction set, so nothing task-specific is baked into the weights.</p>
+ <a class="btn" href="RISC_Hypnexis2026_Round1.pdf">Open the 6-slide deck (PDF)</a>
+ <a class="btn g" href="https://github.com/harshgounder/vakya">Source on GitHub</a>
+</header>
+
+<div class="card">
+ <h2>The problem, measured</h2>
+ <div class="grid">
+  <div><div class="num">55%</div><p>of the 455 teams that built voice agents abandoned the project. Top reason: <b>first-turn understanding</b>.</p></div>
+  <div><div class="num">85%</div><p>drive-thru voice AI accuracy, against <b>89-92%</b> for humans. IVR abandonment <b>38%</b>, and 67% of calls escalate anyway.</p></div>
+  <div><div class="num g">50%+</div><p>speech-to-text error in real Indian fields, from dialect, slang and noise.</p></div>
+ </div>
+ <p style="margin-top:14px">Every one of those systems answers in an <b>open vocabulary</b>. The failure lives in the gap between what was heard and what was executed.</p>
+</div>
+
+<div class="card">
+ <h2>The move</h2>
+ <h3>Move the constraint from the model to the decoder.</h3>
+ <p>A byte-level grammar compiled from the target's own schemas constrains every decoded token, so the action is
+ <b>well-formed by construction</b>, in any script. A garbled utterance can only produce a valid action or a
+ refusal. <b>Never a wrong one.</b></p>
+ <ul>
+  <li>Guardrail, audit trail and refusal become architecture, not aspiration.</li>
+  <li>The grammar becomes the <b>localisation layer</b>: date formats, numeral systems, currency units and enum
+      members live in the grammar, so the model never has to learn them.</li>
+  <li>A wrong pesticide dosage can destroy a crop. A wrong call can be made structurally impossible.</li>
+ </ul>
+</div>
+
+<div class="card">
+ <h2>Three tiers, one binary</h2>
+ <table><thead><tr><th>Tier</th><th>Hardware</th><th>Model</th><th>Envelope</th></tr></thead><tbody>
+ <tr><td><b>A</b></td><td>ESP32-S3, ~$5</td><td>13M int8 open-vocab ASR + wake word + grammar-constrained decoder</td><td>8 MB PSRAM, mW, weeks on battery</td></tr>
+ <tr><td><b>B</b></td><td>sub-$200 Android / RPi 5</td><td>Whistle 16.9 MB + Needle 3, 8-29 MB</td><td>500 tok/s, 28-45 MB RAM</td></tr>
+ <tr><td><b>C</b></td><td>cloud, only if confidence &lt; threshold</td><td>frontier model</td><td>metered $0.08-0.20/min</td></tr>
+ </tbody></table>
+ <p style="margin-top:12px"><b>₹0 per action. 0 network bytes.</b> One box, any task: re-point it by recompiling the grammar, not by retraining the model.</p>
+</div>
+
+<div class="card">
+ <h2>The three contributions</h2>
+ <ul>
+  <li><b>Per-language subnetwork lattice.</b> Tamil pays for 4 layers, code-mixed Hindi pays for 16. One download, 13 scripts.</li>
+  <li><b>Grammar as instruction set.</b> One core, one compiled dialect per app.</li>
+  <li><b>Refusal as a first-class output</b>, calibrated per script, in the user's own register.</li>
+ </ul>
+</div>
+
+<div class="card">
+ <h2>Standing on open work</h2>
+ <p>We did not build the substrate. We stand on it, and we say so.</p>
+ <table><thead><tr><th>Work</th><th>What it gives us</th></tr></thead><tbody>
+ <tr><td><a href="https://github.com/cactus-compute/needle">Cactus Needle 3</a></td><td>8-29 MB grammar-constrained on-device model, 20/16/8/4-layer subnetworks, 2.125 bits/weight trained in from pretraining. Apache 2.0.</td></tr>
+ <tr><td><a href="https://github.com/cactus-compute/cactus">Cactus engine</a></td><td>the inference runtime, plus a <b>published porting oracle</b> to test a runtime against</td></tr>
+ <tr><td><a href="https://arxiv.org/abs/2607.18363">Simple Attention Networks</a></td><td>the architecture family</td></tr>
+ <tr><td><a href="https://arxiv.org/abs/2610.13447">Oído, arXiv 2610.13447</a></td><td>open-vocabulary ASR at 3.70% WER on a $5 microcontroller, no neural accelerator</td></tr>
+ <tr><td><a href="https://github.com/espressif/esp-sr">Espressif ESP-SR</a></td><td>WakeNet wake word, MultiNet with up to 200 commands, TTS on ESP32-S3</td></tr>
+ <tr><td><a href="https://github.com/UbiquitousLearning/DroidCall">DroidCall</a> · <a href="https://huggingface.co/datasets/google/mobile-actions">mobile-actions</a></td><td>public tool-calling training and evaluation data</td></tr>
+ <tr><td><a href="https://arxiv.org/abs/2404.16816">IndicGenBench</a> · <a href="https://arxiv.org/abs/2407.13522">Indic-QA</a></td><td>29 languages, 13 scripts, 4 families</td></tr>
+ </tbody></table>
+</div>
+
+<div class="card">
+ <h2>The gap nobody has built</h2>
+ <p>Bhashini has $600M for 100 Indian LLMs. FarmerChat has 1M+ users and 30,000 hours of farm audio.
+ Farm Vaidya has 5,000 crop Q&A across 100+ crops. The drive-thru industry has 85% accuracy at
+ $0.08-0.20 per minute. NCMS already fields an offline AI-server at TRL-6 with no cloud connectivity in
+ disconnected environments.</p>
+ <p style="margin-top:12px"><b>Offline + $5 + grammar-safe + Indic + zero marginal cost.</b> Every hard component
+ to build it is already open.</p>
+</div>
+
+<footer>
+ <b>Team RISC</b>
+ <div class="team">
+  <div class="member"><b>Harsh Gounder</b><br>Team Lead</div>
+  <div class="member"><b>Farhan Fidin</b></div>
+  <div class="member"><b>Shlok Srivastava</b></div>
+  <div class="member"><b>Shivam Dureja</b></div>
+ </div>
+ <p style="margin-top:16px">Hypnexis 2026, Manipal University Jaipur · 24-25 October 2026 · Theme: AI &amp; Machine Learning</p>
+</footer>
+</div></body></html>
